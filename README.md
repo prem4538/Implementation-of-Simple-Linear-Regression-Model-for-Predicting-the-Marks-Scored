@@ -47,10 +47,10 @@ httpd.serve_forever()
 
 ## Output:
 ### Server Side Output
-![Server Side Output](./images/serveroutput.png)
+![Server Side Output](./images/server output.png)
 
 ### client Side Output
-![client Side Output](./images/clientoutput.png)
+![client Side Output](./images/client output.png)
 
 ## Result:
 Thus the program to implement the simple linear regression model for predicting the marks scored is written and verified using python programming.
