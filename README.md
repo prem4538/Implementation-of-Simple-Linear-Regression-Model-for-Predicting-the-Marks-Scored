@@ -20,29 +20,38 @@ run necessary code in terminal and generate output and take screen shot of it ma
 ## Program:
 
 ```
-from http.server import HTTPServer, BaseHTTPRequestHandler
-content = """
-<!DOCTYPE html>
-<html>
-<head>
-<title>linear regression</title>
-</head>
-<body>
-<h1>Welcome</h1>
-</body>
-</html>
-"""
-class myhandler(BaseHTTPRequestHandler):
-    def do_GET(self):
-        print("request received")
-        self.send_response(200)
-        self.send_header('content-type', 'text/html; charset=utf-8')
-        self.end_headers()
-        self.wfile.write(content.encode())
-server_address = ('',8080)
-httpd = HTTPServer(server_address,myhandler)
-print("linear regression is running...")
-httpd.serve_forever()
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+dataset= pd.read_csv('student_scores.csv')
+dataset.head()
+X=dataset.iloc[:,:-1].values
+X
+y=dataset.iloc[:,1].values
+y
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=1/3,random_state=0)
+from sklearn.linear_model import LinearRegression
+regressor=LinearRegression()
+regressor.fit(X_train,y_train)
+y_pred=regressor.predict(X_test)
+y_pred
+y_test 
+plt.scatter(X_train,y_train,color='orange')
+plt.plot(X_train,regressor.predict(X_train),color='cyan')
+plt.title("Hour vs scores(Training set)")
+#plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+plt.scatter(X_test,y_test,color='cyan')
+plt.plot(X_test,regressor.predict(X_test),color='orange')#plotting the regression line
+plt.title("Hours vs scores(Testing set)")
+#plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+
+
+
 ```
 
 ## Output:
